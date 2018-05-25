@@ -1,0 +1,20 @@
+{
+    "name": "fulopattila122/migdumper",
+    "description": "Takes a bunch of Doctrine migration files and dumps their SQL to the output",
+    "type": "project",
+    "require": {
+        "illuminate/console": "~5.6",
+        "illuminate/container": "~5.6",
+        "illuminate/events": "~5.6"
+    },
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "email": "a.fulop@sevensenders.com"
+        }
+    ]
+}
