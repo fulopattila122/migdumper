@@ -8,13 +8,16 @@
         "illuminate/events": "~5.6"
     },
     "autoload": {
-        "psr-4": {"App\\": "src/"}
+        "psr-4": {
+            "App\\": "src/",
+            "Doctrine\\": "doctrine-fake/"
+        }
     },
     "license": "MIT",
     "authors": [
         {
             "name": "Attila Fulop",
-            "email": "a.fulop@sevensenders.com"
+            "homepage": "https://github.com/fulopattila122"
         }
     ]
 }
