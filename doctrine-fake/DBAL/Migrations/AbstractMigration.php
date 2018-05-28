@@ -2,13 +2,18 @@
 
 namespace Doctrine\DBAL\Migrations;
 
+use Doctrine\DBAL\Connection;
+
 abstract class AbstractMigration
 {
 	protected $sql;
 
-	public function __contstruct()
+	public $connection;
+
+	public function __construct()
 	{
 		$this->sql = '';
+		$this->connection = new Connection();
 	}
 
 	public function addSql($sql)
@@ -19,6 +24,11 @@ abstract class AbstractMigration
 	public function getSql()
 	{
 		return $this->sql . "\n\n" . $this->getInsertVersionSql();
+	}
+
+	public function abortIf($condition, $message = null)
+	{
+		// Just ignore it		
 	}
 
 	private function getInsertVersionSql()
