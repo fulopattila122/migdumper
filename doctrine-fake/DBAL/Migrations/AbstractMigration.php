@@ -13,7 +13,7 @@ abstract class AbstractMigration
 	public function __construct()
 	{
 		$this->sql = '';
-		$this->connection = new Connection();
+		$this->connection = new Connection($this);
 	}
 
 	public function addSql($sql)
