@@ -16,8 +16,22 @@ abstract class AbstractMigration
 		$this->connection = new Connection($this);
 	}
 
-	public function addSql($sql)
+	public function addSql(string $sql, array $params = [], array $types = [])
 	{
+		if (!empty($params)) {
+			$paramNames = array_map(function($item) {
+				return ":$item";
+			}, array_keys($params));
+
+			$quotedParamValues = array_map(function($item) {
+				$value = is_string($item) ? '"' . $item . '"' : $item;
+
+				return is_null($value) ? 'NULL' : $value;
+			}, $params);
+
+			$sql = str_replace($paramNames, $quotedParamValues, $sql);
+		}
+
 		$this->sql .= "$sql;\n";
 	}
 
@@ -33,9 +47,11 @@ abstract class AbstractMigration
 
 	private function getInsertVersionSql()
 	{
+		$parts = explode('\\', get_class($this));
+		
 		return sprintf(
 			"INSERT INTO migration_versions (version) VALUES('%s');\n",
-			str_replace('Version', '', end(explode('\\', get_class($this))))
+			str_replace('Version', '', end($parts))
 		);	
 	}
 }
